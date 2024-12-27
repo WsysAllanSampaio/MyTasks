@@ -7,6 +7,9 @@ public partial class CopyText
     [Parameter, EditorRequired]
     public string TextToCopy { get; set; }
 
+    [Parameter]
+    public string Description { get; set; }
+
     public string ButtonText = "Copiar";
     public string ButtonIcon = "content_copy";
     public string ButtonIconColor = "background-color: transparent; color: royalblue; border: none;";

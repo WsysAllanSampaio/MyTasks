@@ -1,54 +1,56 @@
 ﻿@page "/"
 
-<div style="margin-bottom: 15px;">
-    <RadzenTextBox @bind-value="taskNumber" Placeholder="Task number" />
-</div>
-<div style="margin-bottom: 15px;">
-    <RadzenTextBox @bind-value="taskDescription" Placeholder="Description" />
+<div style="display: flex; gap: 15px; margin-bottom: 15px;">
+    <RadzenTextBox @bind-value="TaskNumber" Placeholder="Task number" style="flex: 1;" />
+    <RadzenTextBox @bind-value="TaskDescription" Placeholder="Description" style="flex: 4;" />
 </div>
 
+<div style="display: flex; gap: 15px; margin-bottom: 15px;">
+    <RadzenCard style="flex: 1;">
+        <div>
+            <RadzenRadioButtonList @bind-Value=@TaskType TValue="string" Orientation="Orientation.Vertical">
+                <Items>
+                    <RadzenRadioButtonListItem Text="feature" Value="@("feat")" />
+                    <RadzenRadioButtonListItem Text="fix" Value="@("fix")" />
+                </Items>
+            </RadzenRadioButtonList>
+        </div>
+    </RadzenCard>
 
-<RadzenCard>
-    <div style="margin-bottom: 15px;">
-        <RadzenRadioButtonList @bind-Value=@TaskType TValue="string" Orientation="Orientation.Vertical">
-            <Items>
-                <RadzenRadioButtonListItem Text="feature" Value="@("feature")" />
-                <RadzenRadioButtonListItem Text="fix" Value="@("fix")" />
-            </Items>
-        </RadzenRadioButtonList>
-    </div>
-</RadzenCard>
+    <RadzenCard style="flex: 1;">
+        <div>
+            <RadzenRadioButtonList @bind-Value=@TaskCommentFirstLine TValue="string" Orientation="Orientation.Vertical">
+                <Items>
+                    <RadzenRadioButtonListItem Text="Padronização" Value="@("Foram feitas as modificações solicitadas.\n\n")" />
+                    <RadzenRadioButtonListItem Text="Segurança" Value="@("Foram feitas as modificações para exibir informações aos usuários de acordo com as suas restrições.\n\n")" />
+                </Items>
+            </RadzenRadioButtonList>
+        </div>
+    </RadzenCard>
 
-<RadzenCard>
-    <div style="margin-bottom: 15px;">
-        <RadzenRadioButtonList @bind-Value=@DataBase TValue="string" Orientation="Orientation.Vertical">
-            <Items>
-                <RadzenRadioButtonListItem Text="WSYS_VITERRA_PROD_29112024" Value="@("WSYS_VITERRA_PROD_29112024")" />
-                <RadzenRadioButtonListItem Text="WSYS_APRESENTACAO_THIAGO_2 " Value="@("WSYS_APRESENTACAO_THIAGO_2 ")" />
-                <RadzenRadioButtonListItem Text="WSYS_APRESENTACAO_12082024_JONATHAN" Value="@("WSYS_APRESENTACAO_12082024_JONATHAN")" />
-            </Items>
-        </RadzenRadioButtonList>
-    </div>
-</RadzenCard>
+    <RadzenCard style="flex: 2;">
+        <div>
+            <RadzenRadioButtonList @bind-Value=@DataBase TValue="string" Orientation="Orientation.Vertical">
+                <Items>
+                    <RadzenRadioButtonListItem Text="WSYS_VITERRA_PROD_29112024" Value="@("\"WSYS_VITERRA_PROD_29112024\"\n\n")" />
+                    <RadzenRadioButtonListItem Text="WSYS_APRESENTACAO_THIAGO_2 " Value="@("\"WSYS_APRESENTACAO_THIAGO_2 \"\n\n")" />
+                    <RadzenRadioButtonListItem Text="WSYS_APRESENTACAO_12082024_JONATHAN" Value="@("\"WSYS_APRESENTACAO_12082024_JONATHAN\"\n\n")" />
+                </Items>
+            </RadzenRadioButtonList>
+        </div>
+    </RadzenCard>
+</div>
 
-<CopyText TextToCopy=@($@"{TaskType}-" + taskNumber) />
-<CopyText TextToCopy=@($@"{TaskType}-{taskNumber} - {taskDescription}") />
-<CopyText TextToCopy=@($@"D:\Pacotes\Allan\{TaskType}-{taskNumber}\Back") />
-<CopyText TextToCopy=@($@"Foram feitas as modificações para exibir informações aos usuários de acordo com as suas restrições.
-Foram feitas as modificações solicitadas.
-
-
-Banco: ""{DataBase}""
-
-Builds: ""D:\Pacotes\Allan\{TaskType}-{taskNumber}""
-
-PRs:
-") />
+<CopyText Description="Branch" TextToCopy=@($@"{TaskType}-" + TaskNumber) />
+<CopyText Description="Commit" TextToCopy=@($@"{TaskType}-{TaskNumber} - {TaskDescription}") />
+<CopyText Description="Publish Path" TextToCopy=@($@"D:\Pacotes\Allan\{TaskType}-{TaskNumber}\Back") />
+<CopyText Description="Task Comment" TextToCopy=@($@"{TaskCommentFirstLine}Banco: {DataBase}Builds: ""D:\Pacotes\Allan\{TaskType}-{TaskNumber}"" {"\n\n"}PRs: {"\n"}") />
 
 @code{
-    public string taskNumber = "";
-    public string taskDescription = "";
-    public string taskComment = "";
+    public string TaskNumber = "";
+    public string TaskDescription = "";
+    public string TaskCommentFirstLine = "";
+    public string TaskComment = "";
     public string TaskType = "";
     public string DataBase = "";
 }
