@@ -1,0 +1,54 @@
+﻿@page "/"
+
+<div style="margin-bottom: 15px;">
+    <RadzenTextBox @bind-value="taskNumber" Placeholder="Task number" />
+</div>
+<div style="margin-bottom: 15px;">
+    <RadzenTextBox @bind-value="taskDescription" Placeholder="Description" />
+</div>
+
+
+<RadzenCard>
+    <div style="margin-bottom: 15px;">
+        <RadzenRadioButtonList @bind-Value=@TaskType TValue="string" Orientation="Orientation.Vertical">
+            <Items>
+                <RadzenRadioButtonListItem Text="feature" Value="@("feature")" />
+                <RadzenRadioButtonListItem Text="fix" Value="@("fix")" />
+            </Items>
+        </RadzenRadioButtonList>
+    </div>
+</RadzenCard>
+
+<RadzenCard>
+    <div style="margin-bottom: 15px;">
+        <RadzenRadioButtonList @bind-Value=@DataBase TValue="string" Orientation="Orientation.Vertical">
+            <Items>
+                <RadzenRadioButtonListItem Text="WSYS_VITERRA_PROD_29112024" Value="@("WSYS_VITERRA_PROD_29112024")" />
+                <RadzenRadioButtonListItem Text="WSYS_APRESENTACAO_THIAGO_2 " Value="@("WSYS_APRESENTACAO_THIAGO_2 ")" />
+                <RadzenRadioButtonListItem Text="WSYS_APRESENTACAO_12082024_JONATHAN" Value="@("WSYS_APRESENTACAO_12082024_JONATHAN")" />
+            </Items>
+        </RadzenRadioButtonList>
+    </div>
+</RadzenCard>
+
+<CopyText TextToCopy=@($@"{TaskType}-" + taskNumber) />
+<CopyText TextToCopy=@($@"{TaskType}-{taskNumber} - {taskDescription}") />
+<CopyText TextToCopy=@($@"D:\Pacotes\Allan\{TaskType}-{taskNumber}\Back") />
+<CopyText TextToCopy=@($@"Foram feitas as modificações para exibir informações aos usuários de acordo com as suas restrições.
+Foram feitas as modificações solicitadas.
+
+
+Banco: ""{DataBase}""
+
+Builds: ""D:\Pacotes\Allan\{TaskType}-{taskNumber}""
+
+PRs:
+") />
+
+@code{
+    public string taskNumber = "";
+    public string taskDescription = "";
+    public string taskComment = "";
+    public string TaskType = "";
+    public string DataBase = "";
+}
