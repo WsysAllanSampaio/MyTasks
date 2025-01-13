@@ -1,6 +1,10 @@
 ﻿@page "/automations"
 
 <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+    <RadzenButton Text="Buscar" Icon="refresh" ButtonStyle="ButtonStyle.Base" Click="@FindTasks" Disabled="true" />
+</div>
+
+<div style="display: flex; gap: 15px; margin-bottom: 15px;">
     <RadzenTextBox @bind-value="TaskNumber" Placeholder="Task number" style="flex: 1;" />
     <RadzenTextBox @bind-value="TaskDescription" Placeholder="Description" style="flex: 4;" />
 </div>
@@ -21,8 +25,8 @@
         <div>
             <RadzenRadioButtonList @bind-Value=@TaskCommentFirstLine TValue="string" Orientation="Orientation.Vertical">
                 <Items>
-                    <RadzenRadioButtonListItem Text="Padronização" Value="@("Foram feitas as modificações solicitadas.\n\n")" />
-                    <RadzenRadioButtonListItem Text="Segurança" Value="@("Foram feitas as modificações para exibir informações aos usuários de acordo com as suas restrições.\n\n")" />
+                    <RadzenRadioButtonListItem Text="Padronização" Value="PadronizacaoValueText" />
+                    <RadzenRadioButtonListItem Text="Segurança" Value="SegurancaValueText" />
                 </Items>
             </RadzenRadioButtonList>
         </div>
@@ -45,12 +49,3 @@
 <CopyText Description="Commit" TextToCopy=@($@"{TaskType}-{TaskNumber} - {TaskDescription}") />
 <CopyText Description="Publish Path" TextToCopy=@($@"D:\Pacotes\Allan\{TaskType}-{TaskNumber}\Back") />
 <CopyText Description="Task Comment" TextToCopy=@($@"{TaskCommentFirstLine}Banco: {DataBase}Builds: ""D:\Pacotes\Allan\{TaskType}-{TaskNumber}"" {"\n\n"}PRs: {"\n"}") />
-
-@code{
-    public string TaskNumber = "";
-    public string TaskDescription = "";
-    public string TaskCommentFirstLine = "";
-    public string TaskComment = "";
-    public string TaskType = "";
-    public string DataBase = "";
-}
