@@ -1,16 +1,14 @@
 ﻿@page "/automations"
 
+
 <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-    <RadzenButton Text="Buscar" Icon="refresh" ButtonStyle="ButtonStyle.Base" Click="@FindTasks" Disabled="true" />
+    <RadzenTextBox @bind-value="TaskNumber" Placeholder="Task number" style="flex: 2;" />
+    <RadzenTextBox @bind-value="TaskDescription" Placeholder="Description" style="flex: 8;" />
+    <RadzenButton Text="Buscar" Icon="refresh" ButtonStyle="ButtonStyle.Base" Click="@FindTasks" Disabled="true" style="flex: 1;" />
 </div>
 
 <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-    <RadzenTextBox @bind-value="TaskNumber" Placeholder="Task number" style="flex: 1;" />
-    <RadzenTextBox @bind-value="TaskDescription" Placeholder="Description" style="flex: 4;" />
-</div>
-
-<div style="display: flex; gap: 15px; margin-bottom: 15px;">
-    <RadzenCard style="flex: 1;">
+    <RadzenCard style="flex: 5;">
         <div>
             <RadzenRadioButtonList @bind-Value=@TaskType TValue="string" Orientation="Orientation.Vertical">
                 <Items>
@@ -21,18 +19,18 @@
         </div>
     </RadzenCard>
 
-    <RadzenCard style="flex: 1;">
+    <RadzenCard style="flex: 5;">
         <div>
             <RadzenRadioButtonList @bind-Value=@TaskCommentFirstLine TValue="string" Orientation="Orientation.Vertical">
                 <Items>
-                    <RadzenRadioButtonListItem Text="Padronização" Value="PadronizacaoValueText" />
-                    <RadzenRadioButtonListItem Text="Segurança" Value="SegurancaValueText" />
+                    <RadzenRadioButtonListItem Text="Padronização" Value=@PadronizacaoValueText />
+                    <RadzenRadioButtonListItem Text="Segurança" Value=@SegurancaValueText />
                 </Items>
             </RadzenRadioButtonList>
         </div>
     </RadzenCard>
 
-    <RadzenCard style="flex: 2;">
+    <RadzenCard style="flex: 11;">
         <div>
             <RadzenRadioButtonList @bind-Value=@DataBase TValue="string" Orientation="Orientation.Vertical">
                 <Items>
@@ -45,7 +43,17 @@
     </RadzenCard>
 </div>
 
-<CopyText Description="Branch" TextToCopy=@($@"{TaskType}-" + TaskNumber) />
-<CopyText Description="Commit" TextToCopy=@($@"{TaskType}-{TaskNumber} - {TaskDescription}") />
-<CopyText Description="Publish Path" TextToCopy=@($@"D:\Pacotes\Allan\{TaskType}-{TaskNumber}\Back") />
-<CopyText Description="Task Comment" TextToCopy=@($@"{TaskCommentFirstLine}Banco: {DataBase}Builds: ""D:\Pacotes\Allan\{TaskType}-{TaskNumber}"" {"\n\n"}PRs: {"\n"}") />
+<div style="display: flex; gap: 15px; margin-bottom: 15px;">
+    <RadzenCard style="flex: 1;">
+        <CopyText Description="Branch" TextToCopy=@($@"{TaskType}-" + TaskNumber) />
+        <CopyText Description="Commit" TextToCopy=@($@"{TaskType}-{TaskNumber} - {TaskDescription}") />
+        <CopyText Description="Publish Path" TextToCopy=@($@"D:\Pacotes\Allan\{TaskType}-{TaskNumber}\Back") />
+    </RadzenCard>
+
+    <RadzenCard style="flex: 1;">
+        <CopyText Description="Título da página" TextToCopy=@TitlePage />
+        <CopyText Description="Task Comment" TextToCopy=@($@"{TaskCommentFirstLine}Banco: {DataBase}Builds: ""D:\Pacotes\Allan\{TaskType}-{TaskNumber}"" {"\n\n"}PRs: {"\n"}") />
+    </RadzenCard>
+</div>
+
+

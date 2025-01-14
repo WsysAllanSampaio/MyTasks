@@ -17,14 +17,19 @@ public partial class AutomationsPage
         {
             taskDescription = value.Replace("Wsys 2.0 - ", "")
                                    .Replace("WSYS 2.0 - ", "");
+
+            TitlePage = taskDescription.Replace("Padronização - Tela ", "")
+                                       .Replace("Segurança - Tela ", "");
+
             TaskType = TaskDescription.ToLower().Contains("padroniza") ? "feat" : "fix";
             TaskCommentFirstLine = TaskDescription.ToLower().Contains("padroniza") ? PadronizacaoValueText : SegurancaValueText;
         } 
     }
 
+    public string TitlePage = "";
+    public string TaskType = "";
     public string TaskCommentFirstLine = "";
     public string TaskComment = "";
-    public string TaskType = "";
     public string DataBase = "\"WSYS_APRESENTACAO_12082024_JONATHAN\"\n\n";
 
     public string PadronizacaoValueText = "Foram feitas as modificações solicitadas.\n\n";
