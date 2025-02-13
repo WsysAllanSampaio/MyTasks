@@ -45,8 +45,8 @@
 
 <div style="display: flex; gap: 15px; margin-bottom: 15px;">
     <RadzenCard style="flex: 1;">
-        <CopyText Description="Branch" TextToCopy=@($@"{TaskType}-" + TaskNumber) />
-        <CopyText Description="Commit" TextToCopy=@($@"{TaskType}-{TaskNumber} - {TaskDescription}") />
+        <CopyText Description="Branch" TextToCopy=@($@"{TaskType}/{TaskNumber}-{TaskDescription.Replace(" ", "-")}") />
+        <CopyText Description="Commit" TextToCopy=@($@"{TaskType}({TaskNumber}): {TaskDescription}") />
         <CopyText Description="Publish Path" TextToCopy=@($@"D:\Pacotes\Allan\{TaskType}-{TaskNumber}\Back") />
     </RadzenCard>
 
